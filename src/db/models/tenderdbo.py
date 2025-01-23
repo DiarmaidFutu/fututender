@@ -1,11 +1,26 @@
 from collections.abc import Iterable
 from datetime import datetime
+import json
 
-from sqlalchemy import ARRAY, String, DateTime, Double, select
+from sqlalchemy import ARRAY, VARCHAR, String, DateTime, Double, TypeDecorator, select
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
 from ..database_session_manager import db_session_context, AsyncSession
+
+
+class StringArray(TypeDecorator):
+    impl = VARCHAR
+
+    def process_bind_param(self, value, dialect):
+        if value is None:
+            return value
+        return json.dumps(value)
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return value
+        return json.loads(value)
 
 
 class TenderDbo(Base):
@@ -14,7 +29,7 @@ class TenderDbo(Base):
     publication_date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     buyer_name: Mapped[str] = mapped_column(String, nullable=False)
     country: Mapped[str] = mapped_column(String, nullable=False)
-    regions: Mapped[list[str]] = mapped_column(ARRAY(String), nullable=False)
+    regions: Mapped[list[str]] = mapped_column(StringArray, nullable=False)
     title: Mapped[str] = mapped_column(String, nullable=False)
     type: Mapped[str] = mapped_column(String, nullable=False)
     link: Mapped[str] = mapped_column(String, nullable=False)

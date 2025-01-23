@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from db.database_session_manager import sessionmanager, get_async_db_session
+from db.database_session_manager import sessionmanager
 from db.utils import run_migrations
 from exceptions.base_exception import FutuTenderBaseException
 from exceptions.database_exception import FutuTenderDatabaseException
@@ -13,6 +13,7 @@ from importer.importer import tenderize_and_save
 from routers.tenders import tender_router
 
 background_tasks = {}
+
 
 async def recurring_import():
     while True:

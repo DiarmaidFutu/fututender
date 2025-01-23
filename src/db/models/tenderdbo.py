@@ -49,7 +49,7 @@ async def save_tender_dbo(tender_dbo: TenderDbo) -> TenderDbo:
 async def save_tender_dbos(tender_dbos: list[TenderDbo]) -> list[TenderDbo]:
     session: AsyncSession = db_session_context.get()
     for tender_dbo in tender_dbos:
-        session.add(tender_dbo)
+        await session.merge(tender_dbo)
     await session.commit()
     for tender_dbo in tender_dbos:
         await session.refresh(tender_dbo)

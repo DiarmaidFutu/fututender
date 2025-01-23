@@ -9,6 +9,7 @@ from alembic import context
 
 from db.models.base import Base
 from db.database_session_manager import ASYNC_DATABASE_URL
+from db.models.tenderdbo import TenderDbo
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from datetime import datetime
 
-from sqlalchemy import String, DateTime, Double, select
+from sqlalchemy import ARRAY, String, DateTime, Double, select
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
@@ -14,7 +14,7 @@ class TenderDbo(Base):
     publication_date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     buyer_name: Mapped[str] = mapped_column(String, nullable=False)
     country: Mapped[str] = mapped_column(String, nullable=False)
-    regions: Mapped[str] = mapped_column(String, nullable=False)
+    regions: Mapped[list[str]] = mapped_column(ARRAY(String), nullable=False)
     title: Mapped[str] = mapped_column(String, nullable=False)
     type: Mapped[str] = mapped_column(String, nullable=False)
     link: Mapped[str] = mapped_column(String, nullable=False)
@@ -35,7 +35,8 @@ async def save_tender_dbos(tender_dbos: list[TenderDbo]) -> list[TenderDbo]:
     for tender_dbo in tender_dbos:
         session.add(tender_dbo)
     await session.commit()
-    await session.refresh(tender_dbos)
+    for tender_dbo in tender_dbos:
+        await session.refresh(tender_dbo)
     return tender_dbos
 
 

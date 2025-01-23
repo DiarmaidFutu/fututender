@@ -15,6 +15,9 @@ class ApiCallConfig:
     sleep: int = 0
 
 
+foo = "test"
+
+
 # source: https://ec.europa.eu/eurostat/web/gisco/geodata/statistical-units/territorial-units-statistics
 json_file_path = "NUTS_LB_2024_3035.geojson"
 file_path = Path(__file__).parent / json_file_path

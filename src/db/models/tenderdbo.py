@@ -2,7 +2,7 @@ from collections.abc import Iterable
 from datetime import datetime
 import json
 
-from sqlalchemy import ARRAY, VARCHAR, String, DateTime, Double, TypeDecorator, select
+from sqlalchemy import VARCHAR, String, DateTime, Double, TypeDecorator, select
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base

@@ -6,12 +6,14 @@ repos:
     entry: poetry run ruff check
     language: system
     types_or: [python, jupyter]
+    stages: [pre-commit]
 
   - id: ruff-format
     name: ruff-format
     language: system
     entry: poetry run ruff format --check
     types_or: [python, jupyter]
+    stages: [pre-commit]
 
   - id: pyright
     name: pyright
@@ -26,3 +28,4 @@ repos:
     entry: poetry run pytest
     types: [python]
     pass_filenames: false
+    stages: [pre-push]

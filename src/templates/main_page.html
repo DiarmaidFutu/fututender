@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EU Tenders</title>
+    <style>
+        th {background-color: #074A41}
+        tr:nth-child(odd) {background-color: #E1DCD7}
+        title {font-size: medium}
+        .buyer {font-size: small}
+    </style>
+</head>
+
+<body>
+<table>
+        <th>Publication ID</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Contract Type</th>
+        <th>Publication Date</th>
+        <th>Deadline</th>
+        <th>Amount</th>
+    {% for tender in tenders %}
+    {% include 'tender.html' %}
+    {% endfor %}
+</table>
+</body>

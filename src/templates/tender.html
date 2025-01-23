@@ -1,0 +1,46 @@
+<tr>
+  <td>
+    <a href={{tender.link}}>{{tender.id}}</a>
+  </td>
+  <td>
+    <div style="display: flex; flex-direction: column">
+      <p class="title">
+        {{tender.title}}
+      </p>
+      <p class="buyer">
+        {{tender.buyer_name}}
+      </p>
+
+    </div>
+  </td>
+  <td>
+    <div style="display: flex; flex-direction: column">
+      <div>
+        <b>
+          {{tender.country}}
+        </b>
+      </div>
+      {% for sub in tender.regions %}
+      <div>
+        {{sub}}
+      </div>
+      {% endfor %}
+    </div>
+  </td>
+  <td>
+    {{tender.type}}
+  </td>
+  <td>
+    {{tender.publication_date}}
+  </td>
+  <td>
+    {% if tender.deadline %}
+    {{tender.deadline}}
+    {% endif %}
+  </td>
+  <td>
+    {% if tender.amount %}
+    {{tender.amount}} {% if tender.currency %} {{tender.currency}} {% endif %}
+    {% endif %}
+  </td>
+</tr>

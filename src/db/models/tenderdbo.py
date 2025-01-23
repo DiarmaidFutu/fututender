@@ -51,8 +51,6 @@ async def save_tender_dbos(tender_dbos: list[TenderDbo]) -> list[TenderDbo]:
     for tender_dbo in tender_dbos:
         await session.merge(tender_dbo)
     await session.commit()
-    for tender_dbo in tender_dbos:
-        await session.refresh(tender_dbo)
     return tender_dbos
 
 

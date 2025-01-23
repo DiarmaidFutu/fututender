@@ -35,6 +35,7 @@ class TenderDbo(Base):
     link: Mapped[str] = mapped_column(String, nullable=False)
     deadline: Mapped[datetime | None] = mapped_column(DateTime)
     amount: Mapped[float | None] = mapped_column(Double)
+    currency: Mapped[str | None] = mapped_column(String)
 
 
 async def save_tender_dbo(tender_dbo: TenderDbo) -> TenderDbo:

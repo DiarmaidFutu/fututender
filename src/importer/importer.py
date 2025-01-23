@@ -3,7 +3,7 @@ import json
 import time
 from models.tender import Tender, save_tenders
 import requests
-from datetime import datetime, UTC
+from datetime import datetime
 from pathlib import Path
 
 
@@ -51,7 +51,7 @@ RELEVANT_FIELDS = [
 def fetch_page(config: ApiCallConfig, token=None):
     url = config.server + config.path
     payload = {
-        "query": "place-of-performance IN (DE21 DE3 DE11) AND classification-cpv IN (48000000 72100000 72210000 72220000 72232000 72240000 72250000 72260000 72300000 72400000 72500000 72600000 72700000 72800000 72900000) AND submission-language IN (ENG DEU FIN) AND form-type IN (planning) SORT BY publication-number DESC",
+        "query": "place-of-performance IN (DE2 DE3 DE1) AND classification-cpv IN (48000000 72100000 72210000 72220000 72232000 72240000 72250000 72260000 72300000 72400000 72500000 72600000 72700000 72800000 72900000 73120000 73200000 73300000) AND submission-language IN (ENG DEU FIN) AND form-type IN (planning) SORT BY publication-number DESC",
         "fields": RELEVANT_FIELDS,
         "paginationMode": "ITERATION",
         "limit": config.limit,

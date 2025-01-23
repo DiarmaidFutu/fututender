@@ -27,6 +27,7 @@ class Tender(Base):
     link: str
     deadline: datetime | None = None
     amount: float | None = None
+    currency: str | None = None
 
 
 async def save_tender(tender: Tender) -> Tender:

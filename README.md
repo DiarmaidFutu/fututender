@@ -2,10 +2,17 @@
 
 An application to view EU tenders that are of interest to Futurice sales
 
-## starting docker
+## Docker
+
+starting up:
 
 ```
 docker compose up --build
+```
+
+tearing down:
+```
+docker compose down -v
 ```
 
 ## Adding migrations: 

@@ -1,4 +1,5 @@
 import contextlib
+from contextvars import ContextVar
 from typing import Any, AsyncIterator
 
 from sqlalchemy.ext.asyncio import (
@@ -22,6 +23,9 @@ ASYNC_DATABASE_URL = f"postgresql+asyncpg://{settings.postgres_user}:{settings.p
 
 class DatabaseExceptionError(Exception):
     pass
+
+
+db_session_context = ContextVar("db_session_context")
 
 
 class DatabaseSessionManager:
@@ -63,11 +67,13 @@ class DatabaseSessionManager:
             raise DatabaseExceptionError("DatabaseSessionManager is not initialised")
         session = self._sessionmaker()
         try:
+            db_session_context.set(session)
             yield session
         except Exception as e:
             await session.rollback()
             raise e
         finally:
+            db_session_context.set(None)
             await session.close()
 
 
